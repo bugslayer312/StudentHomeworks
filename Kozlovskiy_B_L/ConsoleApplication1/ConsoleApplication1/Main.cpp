@@ -42,6 +42,9 @@ int main()
 	std::printf("kolichestvo Name>K\n");
 	std::printf("%d\n", CountIf(array, count, NameStartsWithLetterLessThan_K));
 
+	for (int i = 0; i < count; ++i)
+		free(array[i]);
+
 	system("pause");
 	return 0;
 }
