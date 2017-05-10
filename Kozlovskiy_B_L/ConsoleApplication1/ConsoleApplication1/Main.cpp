@@ -27,19 +27,19 @@ int main()
 	std::printf("Find ball >8.5\n");
 	PrintStudent(Find(array, count, BallGreater_85));
 
-	std::printf("Find Lastname >""P""\n");
+	std::printf("Find Lastname <""P""\n");
 	PrintStudent(Find(array, count, LastnameStartsWithLetterLessThan_P));
 
-	std::printf("Find Lastname >""K""\n");
+	std::printf("Find Lastname <""K""\n");
 	PrintStudent(Find(array, count, NameStartsWithLetterLessThan_K));
 
 	std::printf("kollichestvo chisel >8.5\n");
 	std::printf("%d\n", CountIf(array, count, BallGreater_85));
 
-	std::printf("kolichestvo Lastname >P\n");
+	std::printf("kolichestvo Lastname <P\n");
 	std::printf("%d\n", CountIf(array, count, LastnameStartsWithLetterLessThan_P));
 
-	std::printf("kolichestvo Name>K\n");
+	std::printf("kolichestvo Name <K\n");
 	std::printf("%d\n", CountIf(array, count, NameStartsWithLetterLessThan_K));
 
 	for (int i = 0; i < count; ++i)

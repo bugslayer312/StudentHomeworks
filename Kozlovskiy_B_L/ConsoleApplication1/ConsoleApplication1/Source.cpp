@@ -6,8 +6,8 @@
 struct Student* CreateStudent(char const* name, char const* lastName, float ball)
 {
 	struct Student* students = (struct Student*)malloc(sizeof(struct Student));
-	strncpy(students->Name, name, 20);
-	strncpy(students->lastName, lastName, 20);
+	strncpy(students->Name, name, 19);
+	strncpy(students->lastName, lastName, 19);
 	students->ball = ball;
 	return students;
 }
@@ -44,7 +44,7 @@ bool NameStartsWithLetterLessThan_K(const struct Student* Students)
 }
 bool LastnameStartsWithLetterLessThan_P(const struct Student* Students)
 {
-	return toupper(Students->Name[0]) < 'P';
+	return toupper(Students->lastName[0]) < 'P';
 }
 bool BallGreater_85(const struct Student* Students)
 {
