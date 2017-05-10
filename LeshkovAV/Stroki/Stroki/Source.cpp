@@ -9,8 +9,7 @@ using namespace std;
 char *DeleteOneChar(char *str1, char *str2, size_t numElem)
 {
 	strncpy(str1, str2, numElem - 1);
-	for (size_t i = numElem - 1; *(str2 + i) != '\0'; ++i)
-		*(str1 + i) = *(str2 + i + 1);
+	strcpy(str1 + numElem - 1, str2 + numElem);
 	return str1;
 }
 
@@ -18,12 +17,10 @@ char *DeleteChar(char *str1, char *str2, char sym)
 {
 	char *p_str1 = str1;
 	char *p_str2 = str2;
-	for (; *p_str2 != '\0'; ++p_str1, ++p_str2)
+	for (; *p_str2 != '\0'; ++p_str2)
 	{
 		if (*p_str2 != sym)
-			*p_str1 = *p_str2;
-		else
-			*p_str1--;
+			*p_str1++ = *p_str2;
 	}
 	*p_str1++ = '\0';
 	return str1;
@@ -31,23 +28,18 @@ char *DeleteChar(char *str1, char *str2, char sym)
 
 char *InsertChar(char *str, int numPoz, char sym)
 {
-	char tmp = *(str + numPoz - 1);
-	char tmp2 = *(str + numPoz);
-	char *tmpnext = str + numPoz + 1;
-	*(str + numPoz - 1) = sym;
-	for (size_t i = numPoz; *(str + i) != '\0'; ++i, ++tmpnext)
+	for (char *end_str = str + strlen(str) - 1; end_str > str + numPoz - 2; --end_str)
 	{
-		*(str + i) = tmp;
-		tmp = tmp2;
-		tmp2 = *tmpnext;
+		*(end_str + 1) = *end_str;
 	}
+	*(str + numPoz - 1) = sym;
 	return str;
 }
 
 void Polindrom(char *str)
 {
 	printf("%s\n", str);
-	bool polindrm = false;
+	bool polindrm = true;
 	size_t size = strlen(str) + 1;
 	strupr(str);
 	char *ptr_begin = str;
@@ -70,7 +62,6 @@ void Polindrom(char *str)
 		{
 			ptr_begin++;
 			ptr_end++;
-			polindrm = true;
 		}
 		else
 		{

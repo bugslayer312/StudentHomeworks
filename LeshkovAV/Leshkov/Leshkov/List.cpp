@@ -6,8 +6,8 @@
 
 void GenerateMassiv(int *ptr, size_t size, int begin, int width)
 {
-	for (int i = 0; i < size; i++, ptr++)
-		*ptr = rand() % width + begin;
+	for (int i = 0; i < size; i++)
+		ptr[i] = rand() % width + begin;
 }
 
 void PrintMassiv(int *ptr, size_t size)
@@ -89,18 +89,18 @@ int **SortMassiv(int *ptr, int size)
 	for (size_t i = 0; i < size_mass; i++)
 		*(mass_nElem + i) = 0;
 	for (size_t i = 0; i < size; i++) {
-		if (*(ptr + i) == 0) {
-			*mass_null++ = *(ptr + i);
-			*mass_nElem += 1;
+		if (*(ptr + i) > 0) {
+			*mass_pos++ = *(ptr + i);
+			*(mass_nElem + 2) += 1;
+			continue;
 		}
 		if (*(ptr + i) < 0) {
 			*mass_neg++ = *(ptr + i);
 			*(mass_nElem + 1) += 1;
+			continue;
 		}
-		if (*(ptr + i) > 0) {
-			*mass_pos++ = *(ptr + i);
-			*(mass_nElem + 2) += 1;
-		}
+		*mass_null++ = *(ptr + i);
+		*mass_nElem += 1;
 	}
 	return p_mass;
 }

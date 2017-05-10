@@ -59,9 +59,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	char string[] = "Hello. I'm glad to see you. Let's go to...";
 	printf("%s\n", string);
 	char *p = string;
-	while (strchr(p, '.') != NULL)
+	while (p = strchr(p, '.'))
 	{
-		p = strchr(p, '.');
 		*p = '!';
 	}
 	printf("%s\n", string);
@@ -78,10 +77,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	printf("Vvedite symvol is etoy stroki:  \n");
 	getchar();
 	sym = getchar();
-	for (; *p != '\0'; ++p)
+	while (p = strchr(p, sym))
 	{
-		if (*p == (char)sym)
-			++count;
+		++count;
+		++p;
 	}
 	printf("Simvol %c vstrechaetsya %d raz\n", sym, count);
 	printf("\n");

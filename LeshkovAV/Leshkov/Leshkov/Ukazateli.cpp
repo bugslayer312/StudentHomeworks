@@ -101,32 +101,15 @@ int _tmain(int argc, _TCHAR* argv[])
 	PrintMassiv(pA, M);
 	printf("Kakie elementy massiva udalit: \n'1' - nechetnye\n'2' - chetnye\n");
 	scanf("\n%d", &vybor);
-	switch (vybor)
+	for (int i = 0; i < M; i++) 
 	{
-	case 1:
-		for (int i = 0; i < M; i++) {
-			if (*(pA + i) % 2) {
-				*(pA + i) = *pA_end;
-				i--;
-				M--;
-				pA_end--;
-			}
+		if ((*(pA + i) % 2) && (vybor == 1) || !(*(pA + i) % 2) && (vybor == 2))
+		{
+			*(pA + i) = *pA_end;
+			i--;
+			M--;
+			pA_end--;
 		}
-				break;
-	case 2:
-		for (int i = 0; i < M; i++) {
-			if (!(*(pA + i) % 2)) {
-				*(pA + i) = *pA_end;
-				i--;
-				M--;
-				pA_end--;
-			}
-		}
-				break;
-
-	default:
-		printf("Uncorrect value!!!\n");
-		break;
 	}
 	PrintMassiv(pA, M);
 
