@@ -7,7 +7,7 @@
 struct Data* CreateData(char const* name, int salary)
 {
 	struct Data* result = (struct Data*)malloc(sizeof(struct Data));
-	strncpy(result->Name, name, 21);
+	strncpy(result->Name, name, 20);
 	result->Salary = salary;
 	return result;
 }
