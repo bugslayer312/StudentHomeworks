@@ -19,43 +19,63 @@
 	}
 	bool FindSymbol(const struct Data* data)
 	{
-		return  strchr(data->Name, 77);
+		return  strchr(data->Name, 'M') != NULL;
 	}
-	bool ComparNode(const struct Data* data1, const struct Data* data2)
+	bool CompareNodeBySalary(const struct Data* data1, const struct Data* data2)
 	{
-		if (data1->Salary == data2->Salary)
+		return data1->Salary <= data2->Salary;
+	}
+
+	void CreateCorrectPrintDestroyListCopy(ListNode* first, DataCompareFunc predicate, ListNode* actNewFirst(ListNode*, DataCompareFunc))
+		// chtobi bilo hjnjatno v TestListFunctional() s kakoi fynktiei rabotaem  
+	{
+		struct ListNode* node = first;
+		struct ListNode* newfirst = NULL;
+		while (node)
 		{
-			return -1;
+			newfirst = CreateListCopy(node, newfirst);
+			node = node->Next;
 		}
-		return data1->Salary < data2->Salary;
+		newfirst = actNewFirst(newfirst, *predicate);
+		PrintList(newfirst);
+		DestroyNewFirst(newfirst);
 	}
 
 	 void TestListFunctional()
 	{
 	struct ListNode* first = NULL;
 	int const count = 5;
-	for (int i = 0;i < count; ++i)
+	for (size_t i = 0; i < count; ++i)
 	{
 	 struct Data* data = ReadData();
 	 struct ListNode* node = Create(data);
 	 first = Insert(first, node);
-	}
+	}	
 	PrintList(first);
-	std::cout << std::endl << "FindSymbol 'M' " << std::endl;
-	RemoveAll(first, FindSymbol);
-	std::cout << std::endl << "SalaryGreaterThan500" << std::endl;
-	RemoveAll(first, SalaryGreaterThan500);
-	std::cout << std::endl << "SalaryLessThan500" << std::endl;
-	RemoveAll(first, SalaryLessThan500);
-	std::cout << std::endl << "first" << std::endl;
+
+	std::cout << std::endl << "FindSymbol 'M':\n";
+	CreateCorrectPrintDestroyListCopy(first, FindSymbol, RemoveAll);
+
+	std::cout << std::endl << "SalaryGreaterThan500:\n";
+	CreateCorrectPrintDestroyListCopy(first, SalaryGreaterThan500, RemoveAll);
+
+	std::cout << std::endl << "SalaryLessThan500:\n";
+	CreateCorrectPrintDestroyListCopy(first, SalaryLessThan500, RemoveAll);
+
+	std::cout << std::endl << "first:\n";
 	PrintList(first);
-	std::cout << std::endl << "Revertl(first)" << std::endl;
+	std::cout << std::endl << "Revertl(first):\n";
 	Revertl(first);
-	std::cout << std::endl << "BubbleSort" << std::endl;
-	BubbleSort(first, ComparNode);
-	
+	PrintList(first);
+
+	std::cout << std::endl << "BubbleSort";
+	BubbleSort(first, CompareNodeBySalary);
+	PrintList(first);
+	DestroyFirst(first);
+
 	system("pause");
 	} 
+
 	int main()
 	{
 		 TestListFunctional();

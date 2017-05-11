@@ -11,14 +11,14 @@ struct ListNode
 };
 
 struct ListNode* Create(struct Data* listData);
-void Destroy(struct ListNode* node, bool selector);
+void DestroyFirst(struct ListNode* node);
+void DestroyNewFirst(struct ListNode* node);
 struct ListNode* Insert(struct ListNode* first, struct ListNode* newNode);
 int GetCount(struct ListNode* first);
 void PrintList(struct ListNode* first);
-ListNode* FreeMemory(ListNode* newfirst, size_t& counter);
 ListNode* RemoveAll(ListNode* first, DataCompareFunc predicate);
 ListNode* Revertl(ListNode* first);
-ListNode* GreateNewfirst(ListNode* newfirst, ListNode* first);
+ListNode* CreateListCopy(ListNode* node, ListNode* newfirst);
 void Swap(ListNode* node1, ListNode* node2);
 typedef bool(*TwoDataCompareFunc) (const struct Data*, const struct Data*);
-void BubbleSort(ListNode* first, TwoDataCompareFunc predicate);
+ListNode* BubbleSort(ListNode* first, TwoDataCompareFunc predicate);
