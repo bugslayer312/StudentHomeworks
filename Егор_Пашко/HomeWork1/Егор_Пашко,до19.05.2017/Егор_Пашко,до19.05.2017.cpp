@@ -10,8 +10,8 @@
 struct student
 {
 
-	char *First_name;
-	char* Last_name;
+	char First_name[20];
+	char Last_name[20];
 	float sr_ball;
 };
 
@@ -34,18 +34,18 @@ int main()
 	std::cout << "Выберите что хотите сделать: 1) Выбрать отдельного студента 2) сoртировать список |:";
 	int kyda;
 	std::cin >> kyda;
-	if (kyda == 1)
+	if (kyda = 1)
 	{
 		poisk_kriterii(ssilka, kol_vo_st);
 	}
-	if (kyda == 2)
+	if (kyda = 2)
 	{
 		std::cout << "По чем сортировать структуру: 1) средний балл 2) по алфавиту: ";
 		int vibor;
 		std::cin >> vibor;
-		if (vibor == 1)
+		if (vibor = 1)
 			sortirovka(ssilka, kol_vo_st);
-		if (vibor == 2)
+		if (vibor = 2)
 			sort_sortirovka(ssilka, kol_vo_st);
 	}
 
@@ -57,7 +57,6 @@ int main()
 		std::cout << " " << ssilka[i].First_name << " \t " << ssilka[i].Last_name << "\t" << ssilka[i].sr_ball << "\n";
 	}
 
-	Free(ssilka, kol_vo_st);
 
 	system("pause");
 	return 0;
