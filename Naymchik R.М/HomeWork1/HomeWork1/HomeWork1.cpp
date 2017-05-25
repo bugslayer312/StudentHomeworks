@@ -65,7 +65,7 @@
 	std::cout << std::endl << "first:\n";
 	PrintList(first);
 	std::cout << std::endl << "Revertl(first):\n";
-	Revertl(first);
+	first = Revertl(first);
 	PrintList(first);
 
 	std::cout << std::endl << "BubbleSort";
