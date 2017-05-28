@@ -144,25 +144,32 @@ ListNode* RemoveAll(ListNode* newfirst, DataCompareFunc predicate)
 	}
 	return newfirst;
 }
+
 ListNode* Revertl(ListNode* first)
 {
-	struct ListNode* newNode1 = first;
-	struct ListNode* newNode2 = first->Next;
-	struct ListNode* newNode3 = first->Next->Next;
-	size_t counter = GetCount(first);
-	newNode1->Next = NULL;
-	while (counter - 3)
-	{	
-		newNode2->Next = newNode1;
-		newNode1 = newNode2;
-		newNode2 = newNode3;
-		newNode3 = newNode3->Next;
-		--counter;
+	if (first->Next)
+	{
+		struct ListNode* node1 = first;
+		struct ListNode* node2 = first->Next;
+		struct ListNode* auxilNode = first->Next;
+		size_t counter = GetCount(first);
+		node1->Next = NULL;
+		while (counter - 2)
+		{
+			auxilNode = auxilNode->Next;
+			node2->Next = node1;
+			node1 = node2;
+			node2 = auxilNode;
+			--counter;
+		}
+		node2->Next = node1;
+		first = auxilNode;
+		return  first;
 	}
-	newNode2->Next = newNode1;
-	newNode3->Next = newNode2;
-	first = newNode3;
-	return  first;
+	else
+	{
+		return  first;
+	}		
 }
 
 ListNode* BubbleSort(ListNode* first, TwoDataCompareFunc predicate)
