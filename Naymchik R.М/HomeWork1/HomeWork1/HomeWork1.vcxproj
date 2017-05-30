@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{2CAF111F-580B-4A80-A44A-D7F9F2D4B0B4}</ProjectGuid>
+    <ProjectGuid>{49A3B537-497A-4C1D-8718-1AD7CB2F4A81}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Task1</RootNamespace>
+    <RootNamespace>HomeWork1</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -145,14 +145,16 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="data.h" />
+    <ClInclude Include="Data.h" />
+    <ClInclude Include="List.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="data.cpp" />
+    <ClCompile Include="Data.cpp" />
+    <ClCompile Include="HomeWork1.cpp" />
+    <ClCompile Include="List.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="Task 1.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
