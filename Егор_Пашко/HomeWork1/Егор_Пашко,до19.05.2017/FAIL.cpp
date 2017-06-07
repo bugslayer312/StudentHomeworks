@@ -1,124 +1,96 @@
-#include "FAIL.h"
-
+#include "Header.h"
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
-
-struct student
+bool Сonversion_First_name(const Student* Students)
 {
-
-	char First_name[20];
-	char Last_name[20];
-	float sr_ball;
-};
-
-void Input(student *s)								//Вводим наших студентов
-{
-
-	std::cout << "Введите фамилию студента: ";
-	
-	std::cin.getline(s->Last_name, 20);
-
-
-	std::cout << "Введите имя студента: ";
-	
-	std::cin.getline(s->First_name, 20);
-
-	std::cout << "Введите средний балл студента(1-10): ";
-	(std::cin >> s->sr_ball).ignore();
-	if (s->sr_ball<0 || s->sr_ball > 10) {
-		std::cout << "Попробуйте еще раз" << std::endl;
-		Input(s);
-	}
-
-	
-	std::cout << std::endl;
+	return toupper(Students->First_name[0]) < 'K';
 }
-void sortirovka(student s[], int n)					//Сортировка по Баллу
+bool Сonversion_Last_name(const Student* Students)
 {
-	std::cout << " Имя\tФамилия\tСреднии бал" << std::endl;
-
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = i + 1; j < n; j++)
-		{
-			if (s[i].sr_ball > s[j].sr_ball)
-			{
-				student temp = s[i];
-				s[i] = s[j];
-				s[j] = temp;
-
-			}
-
-		}
-
-	}
-
+	return toupper(Students->Last_name[0]) < 'P';
+}
+int CountIf(Student** students, int count, StudentCompareFunc compare)
+{
+	int kol = 0;
+	for (int i = 0; i < count; ++i)
+		if ((*compare)(students[i]))
+			++kol;
+	return kol;
 }
 
-void sort_sortirovka(student s[], int n)			//Сортировка по Алфавиту
+bool ball_5(const struct Student* students)
 {
-	std::cout << " Имя\tФамилия\tСреднии бал" << std::endl;
-	for (int i = 0, j = i + 1; i < n; i++)
+	return (students->sr_ball) > 5.0;
+}
+
+Student* show(Student** students, int count, StudentCompareFunc compare)
+{
+	for (int i = 0; i < count; ++i)
+		if ((*compare)(students[i]))
+			return students[i];
+}
+
+struct Student* WriteStudent()
+{
+	struct Student* students = (struct Student*)malloc(sizeof(struct Student));
+	std::cout << "Введите имя: "; std::cin >> students->First_name;
+	std::cout << "Введите Фамилию: "; std::cin >> students->Last_name;
+	std::cout << "Введите средний бал: "; std::cin >> students->sr_ball;
+	return students;
+}
+
+
+void BubbleSort(struct Student** Students, int count, CompareTwoStudentsFunc compare)
+{
+	for (int i = 1; i < count; ++i)
 	{
-		student temp;
-		for (int j = i + 1; j < n; j++)
+		if ((*compare)(Students[i - 1], Students[i])>0)
 		{
-			if (strcmp(s[j].First_name, s[j].First_name) > 0)
-			{
-				if (strcmp(s[j].Last_name, s[j].Last_name) > 0)
-				{
-					temp = s[i];
-					s[i] = s[j];
-					s[j] = temp;
-				}
-			}
+			Swap(&Students[i - 1], &Students[i]);
 		}
 	}
 }
 
-int poisk_kriterii(student s[], int n)				//Поиск отдельного студента по критерию 
+int CompareStudentFirstName(const struct Student* students1, const struct Student* students2)
 {
-	std::cout << "Выберите студента по критерию: 1) Имя или фамилия 2) Средний бал: ";
-	int krit;
-	std::cin >> krit;
-	if (krit = 1)
+	return strcmp(students1->First_name, students2->First_name);
+}
+int CompareStudentLastName(const struct Student* students1, const struct Student* students2)
+{
+	return strcmp(students1->Last_name, students2->Last_name);
+}
+int CompareStudentsr_ball(const struct Student* students1, const struct Student* students2)
+{
+	if (students1->sr_ball == students2->sr_ball)
 	{
-		char poisk[15];
-		std::cout << "Введите Имя или фамилию студента: ";
-		std::cin >> poisk;
-		for (int i = 0; i < n; i++)
-		{
-			if ((strcmp(s[i].First_name, poisk) == 0 || (strcmp(s[i].Last_name, poisk) == 0)))
-			{
-				std::cout << "Ваш студент найден: ";
-				std::cout << s[i].First_name << " " << s[i].Last_name << " " << s[i].sr_ball << "\n";
-				system("pause");
-				return 0;
-
-			}
-		}
-		std::cout << "Студент не найден";
 		return 0;
 	}
-	if (krit = 2)
+	return (students1->sr_ball < students2->sr_ball) ? -1 : 1;
+}
+void Sort(struct Student** students, int count, CompareTwoStudentsFunc compare)
+{
+	for (int subCount = count; subCount > 1; --subCount)
 	{
-		float poisk;
-		std::cout << "Введите средний бал студента: ";
-		std::cin >> poisk;
-		for (int i = 0; i < n; i++)
-		{
-			if (s[i].sr_ball = poisk)
-			{
-				std::cout << "Ваш студент найден: ";
-				std::cout << s[i].First_name << " " << s[i].Last_name << " " << s[i].sr_ball << "\n";
-				system("pause");
-				return 0;
-
-			}
-		}
-		std::cout << "Студент не найден";
-		return 0;
+		BubbleSort(students, subCount, compare);
 	}
+}
 
+void Swap(Student** stud1, Student** stud2)
+{
+	Student* tmp = *stud1;
+	*stud1 = *stud2;
+	*stud2 = tmp;
+
+}
+void PrintAllStudent(Student** student, const int n)
+{
+	for (int i(0); i < n; i++)
+	{
+		PrintStudent(student[i]);
+	}
+}
+void PrintStudent(const Student* student)
+{
+	std::cout << "Имя: " << student->First_name << ", Фамилия: " << student->Last_name << ", средний бал: " << student->sr_ball << std::endl;
 }

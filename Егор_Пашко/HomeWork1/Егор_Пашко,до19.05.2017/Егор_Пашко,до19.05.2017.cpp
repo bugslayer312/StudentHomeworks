@@ -1,63 +1,53 @@
 ///////////////////////////// 
 ///Егор_Пашко,до19.05.2017///
 /////////////////////////////
-
-#include "stdafx.h"
-#include "FAIL.h"
-#include <iomanip>
+#include "Header.h"
+#include<cstdlib>
+#include<cstring>
+#include<ctype.h>
 #include <iostream>
-
-struct student
-{
-
-	char First_name[20];
-	char Last_name[20];
-	float sr_ball;
-};
 
 
 int main()
 {
 	setlocale(LC_ALL, "Russian");
-	std::cout << "\t\t\t***Выполнил Егор Пашко***\n" << std::endl;
-	const int kol_vo_st = 3;  //Выберите кол-во студентов
 
-	student ssilka[kol_vo_st];
-	for (int i(0); i <kol_vo_st; i++)
-	{
+	const int count = 2;
+	Student* arr[count];
+	for (int i = 0; i <count; i++) { arr[i] = WriteStudent(); }
 
-		std::cout << std::endl << i + 1 << ")Студент: \n\n";
-		Input(&ssilka[i]);
-		system("cls");
-	}
+	std::cout << ("Сортируем по имени\n");
+	Sort(arr, count, CompareStudentFirstName);
+	PrintAllStudent(arr, count);
 
-	std::cout << "Выберите что хотите сделать: 1) Выбрать отдельного студента 2) сoртировать список |:";
-	int kyda;
-	std::cin >> kyda;
-	if (kyda = 1)
-	{
-		poisk_kriterii(ssilka, kol_vo_st);
-	}
-	if (kyda = 2)
-	{
-		std::cout << "По чем сортировать структуру: 1) средний балл 2) по алфавиту: ";
-		int vibor;
-		std::cin >> vibor;
-		if (vibor = 1)
-			sortirovka(ssilka, kol_vo_st);
-		if (vibor = 2)
-			sort_sortirovka(ssilka, kol_vo_st);
-	}
+	std::cout << ("Сортируем по фамилии\n");
+	Sort(arr, count, CompareStudentLastName);
+	PrintAllStudent(arr, count);
 
+	std::cout << ("Сортируем по среднему балу\n");
+	Sort(arr, count, CompareStudentsr_ball);
+	PrintAllStudent(arr, count);
 
+	std::cout << "Найти студента с балом выше 5.0\n";
+	PrintStudent(show(arr, count, ball_5));
 
+	std::cout << "Поиск по критерию Имя <""P""\n";
+	PrintStudent(show(arr, count, Сonversion_First_name));
+
+	std::cout << "Поиск по критерию Фамилии <""P""\n";
+	PrintStudent(show(arr, count, Сonversion_Last_name));
+
+	std::cout << "Кол-во студентов с баллом выше 5.0: ";
+	std::cout << CountIf(arr, count, ball_5);
+
+	std::cout << "\nкол-во имен  < K: ";
+	std::cout << CountIf(arr, count, Сonversion_First_name);
+
+	std::cout << "\nКол-во фамилий < P: ";
+	std::cout << CountIf(arr, count, Сonversion_Last_name);
 	std::cout << std::endl;
-	for (int i(0); i < kol_vo_st; i++)
-	{
-		std::cout << " " << ssilka[i].First_name << " \t " << ssilka[i].Last_name << "\t" << ssilka[i].sr_ball << "\n";
-	}
 
-
-	system("pause");
+	for (int i = 0; i < count; ++i)
+		free(arr[i]);
 	return 0;
 }
