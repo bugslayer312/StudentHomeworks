@@ -1,12 +1,12 @@
-#include "Header.h"
+#include "FAIL.h"
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
-bool Ñonversion_First_name(const Student* Students)
+bool Check_last_name_less_than_K(const Student* Students)
 {
 	return toupper(Students->First_name[0]) < 'K';
 }
-bool Ñonversion_Last_name(const Student* Students)
+bool Check_first_name_less_than_P(const Student* Students)
 {
 	return toupper(Students->Last_name[0]) < 'P';
 }
@@ -19,7 +19,7 @@ int CountIf(Student** students, int count, StudentCompareFunc compare)
 	return kol;
 }
 
-bool ball_5(const struct Student* students)
+bool high_middle_ball_5(const struct Student* students)
 {
 	return (students->sr_ball) > 5.0;
 }
@@ -29,14 +29,15 @@ Student* show(Student** students, int count, StudentCompareFunc compare)
 	for (int i = 0; i < count; ++i)
 		if ((*compare)(students[i]))
 			return students[i];
+	return *(students);
 }
 
-struct Student* WriteStudent()
+struct Student* ReadStudent()
 {
 	struct Student* students = (struct Student*)malloc(sizeof(struct Student));
-	std::cout << "Ââåäèòå èìÿ: "; std::cin >> students->First_name;
-	std::cout << "Ââåäèòå Ôàìèëèþ: "; std::cin >> students->Last_name;
-	std::cout << "Ââåäèòå ñðåäíèé áàë: "; std::cin >> students->sr_ball;
+	std::cout << "Enter name: "; std::cin >> students->First_name;
+	std::cout << "Enter last name: "; std::cin >> students->Last_name;
+	std::cout << "Enter middle ball: "; std::cin >> students->sr_ball;
 	return students;
 }
 
@@ -83,14 +84,13 @@ void Swap(Student** stud1, Student** stud2)
 	*stud2 = tmp;
 
 }
-void PrintAllStudent(Student** student, const int n)
+void PrintAllStudent(Student** student,const int n)
 {
 	for (int i(0); i < n; i++)
-	{
 		PrintStudent(student[i]);
-	}
+	
 }
-void PrintStudent(const Student* student)
+void PrintStudent(const struct Student* students)
 {
-	std::cout << "Èìÿ: " << student->First_name << ", Ôàìèëèÿ: " << student->Last_name << ", ñðåäíèé áàë: " << student->sr_ball << std::endl;
+	std::cout << "Name: " << students->First_name << ", Lastname: " << students->Last_name << ", Ball: " << students->sr_ball << std::endl;
 }
