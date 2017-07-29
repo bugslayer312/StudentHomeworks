@@ -26,7 +26,8 @@
 		return data1->Salary <= data2->Salary;
 	}
 
-	void CreateCorrectPrintDestroyListCopy(ListNode* first, DataCompareFunc predicate, ListNode* actNewFirst(ListNode*, DataCompareFunc))
+	void CreateCorrectPrintDestroyListCopy(ListNode* first, DataCompareFunc predicate,
+		ListNode* actNewFirst(ListNode*, DataCompareFunc))
 		// chtobi bilo hjnjatno v TestListFunctional() s kakoi fynktiei rabotaem  
 	{
 		struct ListNode* node = first;
